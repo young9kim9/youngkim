@@ -1,0 +1,83 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    font-family: 'Instrument Sans', sans-serif;
+  }
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    z-index: 2;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 30px;
+    padding: 16px 20px;
+    box-sizing: border-box;
+    color: #000000;
+  }
+
+header a {
+text-decoration: none;
+color: #000000;
+font-size: 14px;
+}
+
+main {
+position: relative;
+margin-left: 20px;
+margin-right: 20px;
+margin-bottom: 30px;
+margin-top: 84px;
+}
+
+.list-container {
+margin-top: 60px;
+list-style: none;
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+gap: 10px;
+row-gap: 40px;
+padding: 0;
+}
+
+.list-container a {
+flex-basis: 414px;
+position: relative;
+text-decoration: none;
+}
+
+.list-container li img {
+object-fit: cover;
+width: 100%;
+height: 278px;
+vertical-align: middle;
+border-radius: 6px;
+}
+
+.list-container li .category {
+margin-top: 10px;
+font-size: 12px;
+color: #636363;
+}
+
+.list-container li .title {
+margin-top: 6px;
+font-size: 16px;
+color: #000000;
+}
+
+@media (max-width: 767px) { 
+.desktop-nav {
+display: none;
+}
+
+.mobile-nav {
+display: block;
+}
+}

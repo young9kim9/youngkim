@@ -1,0 +1,121 @@
+body {
+    margin: 0;
+    font-family: "Instrument Sans", sans-serif;
+    font-weight: 400;
+    background-color: #ffffff;
+  
+  }
+  
+  header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    z-index: 2;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 30px;
+    padding: 16px 20px;
+    box-sizing: border-box;
+    color: #000000;
+  }
+
+header a {
+text-decoration: none;
+color: #000000;
+font-size: 14px;
+}
+  
+  main {
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 30px;
+    margin-top: 100px;
+  }
+  
+  main img {
+    display: block;
+      width: 100%;
+      height: auto;
+      vertical-align: middle;
+      border-radius: 6px;
+    margin-top: 20px;
+    }
+  
+  main .category {
+    font-size: 14px;
+    color: #636363;
+  }
+  
+  main .title {
+    margin-top: 6px;
+    font-size: 36px;
+    color: #000000;
+  }
+  
+  .text-container {
+    margin-top: 100px;
+    margin-bottom: 100px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+  }
+  
+  .text-container .info {
+    width: 263px;
+    line-height: 1.5;
+  }
+  
+  .text-container .description {
+    width: 547px;
+    line-height: 1.5;
+  }
+  
+  main iframe {
+    border-radius: 6px;
+  }
+  
+  .img-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+  }
+  
+  .img-container img {
+      max-width: 552px; /* Set a specific width for each image */
+      height: auto; /* Maintain aspect ratio */
+      margin-right: 10px;
+  }
+  
+  .image-pair {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  
+  .image-pair img {
+    margin: 0;
+  }
+  
+  @media (max-width: 767px) { 
+    .desktop-nav {
+      display: none;
+      }
+  
+    .mobile-nav {
+      display: block;
+      }
+    
+    .image-pair {
+    grid-template-columns: 1fr;
+    }
+  }
+  
+  @media (max-width: 870px) {
+    .text-container {
+      justify-content: left;
+    }
+  }
+
