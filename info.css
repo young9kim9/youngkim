@@ -1,0 +1,96 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    font-family: 'Instrument Sans', sans-serif;
+  }
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    z-index: 2;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 30px;
+    padding: 16px 20px;
+    box-sizing: border-box;
+    color: #000000;
+  }
+
+header a {
+    text-decoration: none;
+    color: #000000;
+    font-size: 14px;
+    }
+  
+main {
+    display: grid;
+    grid-template-columns: 1.8fr 0.5fr 1fr;
+    gap: 42px;
+    align-items: flex-start;
+    margin-top: 84px;
+    margin-left: 20px;
+    margin-right: 20px;
+    /* min-height: 82vh; */
+  }
+  
+.col {
+    font-size: 14px;
+  }
+
+.bio {
+    margin-right: 90px;
+}
+  
+.bio p {
+    margin-top: 0;
+    margin-bottom: 30px;
+    max-width: 610px;
+    line-height: 28px;
+    font-size: 20px;
+  }
+.links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+.links li {
+    margin-bottom: 6px;
+  }
+.links a {
+    color: #000000;
+    text-decoration: none;
+  }
+.links a:hover {
+    text-decoration: underline;
+  }
+  
+.experience {
+    max-width: 180px;
+}
+
+.section-title {
+    margin-bottom: 20px;
+    margin-top: 0;
+  }
+.exp-block {
+    margin-bottom: 20px;
+  }
+  
+footer {
+    margin-top: 40px;
+    margin-left: 20px;
+    font-size: 14px;
+  }
+
+  
+  @media (max-width: 780px) {
+    main {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+  }
