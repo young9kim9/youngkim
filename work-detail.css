@@ -3,7 +3,6 @@ body {
     font-family: "Instrument Sans", sans-serif;
     font-weight: 400;
     background-color: #ffffff;
-  
   }
   
   header {
@@ -27,14 +26,14 @@ color: #000000;
 font-size: 14px;
 }
   
-  main {
+main {
     margin-left: 20px;
     margin-right: 20px;
-    margin-bottom: 30px;
     margin-top: 100px;
+    margin-bottom: 40px;
   }
   
-  main img {
+main img {
     display: block;
       width: 100%;
       height: auto;
@@ -43,18 +42,18 @@ font-size: 14px;
     margin-top: 20px;
     }
   
-  main .category {
+main .category {
     font-size: 14px;
     color: #636363;
   }
   
-  main .title {
+main .title {
     margin-top: 6px;
     font-size: 36px;
     color: #000000;
   }
   
-  .text-container {
+.text-container {
     margin-top: 100px;
     margin-bottom: 100px;
     display: flex;
@@ -63,43 +62,44 @@ font-size: 14px;
     justify-content: center;
   }
   
-  .text-container .info {
+.text-container .info {
     width: 263px;
     line-height: 1.5;
   }
   
-  .text-container .description {
+.text-container .description {
     width: 547px;
     line-height: 1.5;
   }
   
-  main iframe {
+main iframe {
     border-radius: 6px;
   }
   
-  .img-container {
+.img-container {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
   }
   
-  .img-container img {
+.img-container img {
       max-width: 552px; /* Set a specific width for each image */
       height: auto; /* Maintain aspect ratio */
       margin-right: 10px;
   }
   
-  .image-pair {
+.image-pair {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 20px;
+    margin-top: 20px;
   }
   
-  .image-pair img {
+.image-pair img {
     margin: 0;
   }
   
-  @media (max-width: 767px) { 
+@media (max-width: 767px) { 
     .desktop-nav {
       display: none;
       }
@@ -113,7 +113,7 @@ font-size: 14px;
     }
   }
   
-  @media (max-width: 870px) {
+@media (max-width: 870px) {
     .text-container {
       justify-content: left;
     }
