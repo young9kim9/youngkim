@@ -27,6 +27,11 @@ color: #000000;
 font-size: 14px;
 }
 
+header a:hover {
+  color: #888;
+  transition: color 0.2s;
+}
+
 main {
 position: relative;
 margin-left: 20px;
