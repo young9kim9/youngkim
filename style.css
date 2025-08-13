@@ -65,9 +65,8 @@ left: 0; top: 0;
 transform: translate(-50%, -120%);
 background: #fff;
 color: #000;
-border-radius: 30px;
 font-size: 14px;
-padding: 6px 14px;
+padding: 1px 2px;
 pointer-events: auto;
 z-index: 100;
 white-space: pre-line;
@@ -84,7 +83,7 @@ header {
     position: relative;
     z-index: 2;
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
     gap: 30px;
     padding: 16px 20px;
@@ -104,7 +103,17 @@ header a:hover {
   transition: color 0.2s;
 }
 
-  main {
+.nav-left {
+  display: flex;
+  align-items: center;
+}
+
+.nav-right {
+  display: flex;
+  gap: 30px;
+}
+
+main {
     position: relative;
     z-index: 2;
     width: 100vw;
@@ -114,7 +123,7 @@ header a:hover {
     justify-content: center;
   }
 
-  .center-content {
+.center-content {
     color: #fff;
     text-align: center;
     font-size: 2rem;
@@ -124,6 +133,19 @@ header a:hover {
   @media (max-width: 768px) {
     .center-content { font-size: 1.2rem; }
     main { padding-top: 60px; }
-    header { font-size: 1rem; }
+    header { 
+      font-size: 1rem;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: flex-start;
+    }
+    .nav-left,
+    .nav-right {
+      display: flex;
+      gap: 16px;
+    }
+    .nav-right {
+      margin-left: 10px;
+    }
     .slide-zone { width: 50vw; height: 100vh; }
   }
