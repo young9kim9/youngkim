@@ -135,17 +135,6 @@ main {
     main { padding-top: 60px; }
     header { 
       font-size: 1rem;
-      flex-direction: row;
-      flex-wrap: wrap;
-      align-items: flex-start;
-    }
-    .nav-left,
-    .nav-right {
-      display: flex;
-      gap: 16px;
-    }
-    .nav-right {
-      margin-left: 10px;
     }
     .slide-zone { width: 50vw; height: 100vh; }
   }
