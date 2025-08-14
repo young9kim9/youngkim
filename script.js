@@ -83,4 +83,52 @@ window.addEventListener('DOMContentLoaded', function() {
   
     startAuto();
   });
-  
+
+
+
+// (function () {
+//     const lens = document.querySelector('.cursor-lens');
+//     let raf, lastX = 0, lastY = 0, visible = false;
+
+//     // Only show lens over the main viewport area
+//     const showLens = () => { if (!visible) { lens.style.opacity = 1; visible = true; } };
+//     const hideLens = () => { lens.style.opacity = 0; visible = false; };
+
+//     // Smooth follow
+//     const target = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+//     const pos = { x: target.x, y: target.y };
+
+//     function animate() {
+//       pos.x += (target.x - pos.x) * 0.18;
+//       pos.y += (target.y - pos.y) * 0.18;
+//       lens.style.transform = `translate(${pos.x - 0.5 * lens.offsetWidth}px, ${pos.y - 0.5 * lens.offsetHeight}px)`;
+//       raf = requestAnimationFrame(animate);
+//     }
+//     animate();
+
+//     // Track mouse
+//     window.addEventListener('mousemove', (e) => {
+//       target.x = e.clientX;
+//       target.y = e.clientY;
+//       showLens();
+
+//       // Add quick “moving” class to reduce transition lag
+//       lens.classList.add('is-moving');
+//       clearTimeout(lens._t);
+//       lens._t = setTimeout(() => lens.classList.remove('is-moving'), 120);
+//     });
+
+//     // Hide when leaving window
+//     window.addEventListener('mouseleave', hideLens);
+
+//     // Optional: make lens a bit bigger/smaller over the left/center/right zones
+//     // If you already have .slide-zone.left/.center/.right:
+//     ['left','center','right'].forEach(zone => {
+//       const el = document.querySelector(`.slide-zone.${zone}`);
+//       if (!el) return;
+//       el.addEventListener('mouseenter', () => {
+//         lens.style.width = zone === 'center' ? '400px' : '400px';
+//         lens.style.height = lens.style.width;
+//       });
+//     });
+//   })();

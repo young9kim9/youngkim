@@ -7,29 +7,37 @@ html, body {
   }
 
 header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    z-index: 2;
+    position: relative;
+    z-index: 20;
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
     gap: 30px;
     padding: 16px 20px;
     box-sizing: border-box;
-    color: #000000;
+    color: #fff;
+    mix-blend-mode: difference;
   }
 
 header a {
 text-decoration: none;
-color: #000000;
+color: #000;
 font-size: 14px;
 }
 
 header a:hover {
   color: #888;
   transition: color 0.2s;
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+}
+
+.nav-right {
+  display: flex;
+  gap: 30px;
 }
 
 main {

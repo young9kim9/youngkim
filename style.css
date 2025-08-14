@@ -13,9 +13,9 @@ html, body {
     left: 0;
     width: 100vw;
     height: 100vh;
-/*         z-index: -1; */
     overflow: hidden;
   }
+
 .slideshow-container img {
     position: absolute;
     width: 100vw;
@@ -59,29 +59,27 @@ cursor: pointer;
 }
 
 .slide-tooltip {
-display: none;
-position: fixed;
-left: 0; top: 0;
-transform: translate(-50%, -120%);
-background: #fff;
-color: #000;
-font-size: 14px;
-padding: 1px 2px;
-pointer-events: auto;
-z-index: 100;
-white-space: pre-line;
-text-decoration: none;
-transition: opacity 0.18s;
+  position: fixed;
+  z-index: 15;
+  display: none;
+  left: 0; top: 0;
+  transform: translate(-50%, -120%);
+  background: #fff;
+  color: #000;
+  font-size: 14px;
+  padding: 1px 2px;
+  white-space: pre-line;
+  text-decoration: none;
+  transition: opacity 0.18s;
+  pointer-events: auto;
 }
-
-.slide-tooltip.show {
-display: block;
-opacity: 1;
+.slide-tooltip.show { 
+  display: block; opacity: 1; 
 }
 
 header {
     position: relative;
-    z-index: 2;
+    z-index: 20;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -130,6 +128,54 @@ main {
     mix-blend-mode: difference;
   }
 
+.cursor-lens {
+  position: fixed;
+  top: 0; left: 0;
+  width: 160px; height: 160px;
+  pointer-events: none;
+  z-index: 10;
+  opacity: 0;
+  transition: opacity 180ms ease;
+
+  /* glass */
+  backdrop-filter: blur(12px) saturate(1.2) contrast(1.05) brightness(1.06);
+  -webkit-backdrop-filter: blur(12px) saturate(1.2) contrast(1.05) brightness(1.06);
+
+  /* important: no blend mode; no border */
+  mix-blend-mode: normal;
+  border: none;
+
+  /* circular + feathered edge via mask */
+  border-radius: 50%;
+  -webkit-mask-image: radial-gradient(
+    circle at 50% 50%,
+    #000 40%,          /* fully visible center */
+    rgba(0,0,0,0) 75%  /* fade to transparent */
+  );
+  mask-image: radial-gradient(
+    circle at 50% 50%,
+    #000 40%,
+    rgba(0,0,0,0) 75%
+  );
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+
+  /* backdrop-filter sometimes needs a tiny bg to avoid a seam */
+  background: rgba(255,255,255,0.001);
+
+  /* we’re positioning with left/top from JS, so no translate */
+  transform: none;
+
+  /* helps some browsers render clean edges */
+  contain: paint;
+  will-change: transform, backdrop-filter;
+}
+
+
+.cursor-lens.is-moving {
+  transition: none;
+}
+
   @media (max-width: 768px) {
     .center-content { font-size: 1.2rem; }
     main { padding-top: 60px; }
@@ -137,4 +183,5 @@ main {
       font-size: 1rem;
     }
     .slide-zone { width: 50vw; height: 100vh; }
+    .cursor-lens { display: none; }
   }
