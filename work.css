@@ -7,22 +7,26 @@ html, body {
   }
 
 header {
-    position: relative;
-    z-index: 20;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 30px;
-    padding: 16px 20px;
-    box-sizing: border-box;
-    color: #fff;
-    mix-blend-mode: difference;
-  }
+  position: fixed;             
+  top: 0;                      
+  left: 0;
+  width: 100%;                 
+  z-index: 20;                 
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 30px;
+  padding: 16px 20px;
+  box-sizing: border-box;
+  background-color: #fff;      
+  color: #000;                 
+  mix-blend-mode: normal;      
+}
 
 header a {
-text-decoration: none;
-color: #000;
-font-size: 14px;
+  text-decoration: none;
+  color: #000;
+  font-size: 14px;
 }
 
 header a:hover {

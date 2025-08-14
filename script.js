@@ -38,51 +38,111 @@
 //   parsonsElement.textContent = 'Parsons School of Design';
 // });
 
-window.addEventListener('DOMContentLoaded', function() {
-    const slides = document.querySelectorAll('.slideshow-container img');
-    let current = 0;
-    let interval = null;
-    const tooltip = document.querySelector('.slide-tooltip');
-    const centerZone = document.querySelector('.slide-zone.center');
-    const leftZone = document.querySelector('.slide-zone.left');
-    const rightZone = document.querySelector('.slide-zone.right');
-  
-    function showSlide(idx) {
-      slides[current].classList.remove('active');
-      current = (idx + slides.length) % slides.length;
-      slides[current].classList.add('active');
-    }
-    function nextSlide() { showSlide(current + 1); }
-    function prevSlide() { showSlide(current - 1); }
-    function startAuto() { interval = setInterval(nextSlide, 6000); }
-    function resetAuto() { clearInterval(interval); startAuto(); }
-  
-    // Cursor/click logic
-    leftZone.addEventListener('click', function(e) { e.stopPropagation(); prevSlide(); resetAuto(); });
-    rightZone.addEventListener('click', function(e) { e.stopPropagation(); nextSlide(); resetAuto(); });
-  
-    // Tooltip logic
-    centerZone.addEventListener('mousemove', function(e) {
-      const desc = slides[current].dataset.desc || '';
-      const link = slides[current].dataset.link || '#';
-      tooltip.textContent = desc;
-      tooltip.href = link;
-      tooltip.classList.add('show');
-      tooltip.style.left = `${e.clientX}px`;
-      tooltip.style.top = `${e.clientY}px`;
-    });
-    centerZone.addEventListener('mouseleave', function() {
-      tooltip.classList.remove('show');
-    });
-  
-    // Clicking center tooltip goes to the link
-    centerZone.addEventListener('click', function(e) {
-      const link = slides[current].dataset.link;
-      if(link) window.open(link, '_blank');
-    });
-  
+window.addEventListener('DOMContentLoaded', function () {
+  // --- Elements ---
+  const slides     = document.querySelectorAll('.slideshow-container img');
+  const tooltip    = document.querySelector('.slide-tooltip');
+  const centerZone = document.querySelector('.slide-zone.center');
+  const leftZone   = document.querySelector('.slide-zone.left');
+  const rightZone  = document.querySelector('.slide-zone.right');
+
+  // Guard: if something is missing, bail early
+  if (!slides.length || !tooltip || !centerZone || !leftZone || !rightZone) {
+    console.warn('Main page: required elements missing.');
+    return;
+  }
+
+  // --- Per-slide tooltip colors (index matches slides order) ---
+  const tooltipFontColors = ['#ffffff', '#f5f6ce', '#000000', '#000000', '#f18523'];
+  const tooltipBgColors   = ['#5ead52', '#248bc6', '#ff83ab', '#ffffff', '#f6eeec'];
+
+  function updateTooltipColors(index) {
+    tooltip.style.setProperty('--tt-fg', tooltipFontColors[index]);
+    tooltip.style.setProperty('--tt-bg', tooltipBgColors[index]);
+  }
+
+  // --- Slideshow state ---
+  let current  = 0;
+  let interval = null;
+
+  // If one slide is already marked active in HTML, start from it
+  const activeIndex = Array.from(slides).findIndex(s => s.classList.contains('active'));
+  if (activeIndex >= 0) {
+    current = activeIndex;
+  } else {
+    // Ensure slide 0 is visible if none marked active
+    slides[0].classList.add('active');
+  }
+
+  // Set initial tooltip colors for the starting slide
+  updateTooltipColors(current);
+
+  // --- Slideshow helpers ---
+  function showSlide(idx) {
+    slides[current].classList.remove('active');
+    current = (idx + slides.length) % slides.length;
+    slides[current].classList.add('active');
+    updateTooltipColors(current); // keep tooltip colors in sync with current slide
+  }
+
+  function nextSlide() { showSlide(current + 1); }
+  function prevSlide() { showSlide(current - 1); }
+
+  function startAuto() {
+    interval = setInterval(nextSlide, 6000);
+  }
+  function resetAuto() {
+    clearInterval(interval);
     startAuto();
+  }
+
+  // --- Click navigation (left/right) ---
+  leftZone.addEventListener('click', (e) => {
+    e.stopPropagation();
+    prevSlide();
+    resetAuto();
   });
+
+  rightZone.addEventListener('click', (e) => {
+    e.stopPropagation();
+    nextSlide();
+    resetAuto();
+  });
+
+  // --- Tooltip behavior in center zone ---
+  centerZone.addEventListener('mousemove', (e) => {
+    const desc = slides[current].dataset.desc || '';
+    const link = slides[current].dataset.link || '#';
+
+    // If your tooltip has a <span>, write into it; otherwise write directly
+    // Example if you DO have <a class="slide-tooltip"><span></span></a>:
+    // const span = tooltip.querySelector('span'); if (span) span.textContent = desc; else tooltip.textContent = desc;
+
+    tooltip.textContent = desc; // if your tooltip is plain <a> without inner <span>
+    tooltip.href = link;
+
+    // Ensure colors reflect current slide even if the user hovers before first transition
+    updateTooltipColors(current);
+
+    tooltip.classList.add('show');
+    tooltip.style.left = `${e.clientX}px`;
+    tooltip.style.top  = `${e.clientY}px`;
+  });
+
+  centerZone.addEventListener('mouseleave', () => {
+    tooltip.classList.remove('show');
+  });
+
+  centerZone.addEventListener('click', () => {
+    const link = slides[current].dataset.link;
+    if (link) window.open(link, '_blank', 'noopener');
+  });
+
+  // Start auto-advance
+  startAuto();
+});
+
+
 
 
 
