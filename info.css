@@ -62,6 +62,8 @@ main {
 .bio { 
   margin-right: 90px; 
 }
+
+.bio-photo { display: none; }
   
 .bio p {
     margin-top: 0;
@@ -128,6 +130,28 @@ footer {
     }
 
     .bio {
-    margin-right: 20px;
+      margin-right: 20px;
+      display: flex;
+      flex-direction: column;
     }
+
+    .cursor-photo {
+      order: -1; 
+      max-width: 50%;      
+      margin-bottom: 20px;
+      align-items: center;
+      text-align: left;
+    }
+
+    .bio-photo {
+      display: block;
+      order: -1;
+      max-width: 100%;
+      width: 50%;
+      height: auto;
+      border-radius: 6px;
+      margin-bottom: 20px;
+    }
+
+    .cursor-photo { display: none; }
   }
