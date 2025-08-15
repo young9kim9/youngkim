@@ -1,151 +1,3 @@
-// const nameElement = document.getElementById('name');
-// nameElement.addEventListener('mouseenter', () => {
-//   nameElement.textContent = 'Young Kim 😉👋🏻';
-// });
-// nameElement.addEventListener('mouseleave', () => {
-//   nameElement.textContent = 'Young Kim';
-// });
-
-// // const homeElement = document.getElementById('home');
-// // homeElement.addEventListener('mouseenter', () => {
-// //   homeElement.textContent = '김소영';
-// // });
-// // homeElement.addEventListener('mouseleave', () => {
-// //   homeElement.textContent = 'Young Kim';
-// // });
-
-// const graphicElement = document.getElementById('graphic');
-// graphicElement.addEventListener('mouseenter', () => {
-//   graphicElement.textContent = 'graphic ✏️';
-// });
-// graphicElement.addEventListener('mouseleave', () => {
-//   graphicElement.textContent = 'graphic';
-// });
-
-// // const uxElement = document.getElementById('ux');
-// // uxElement.addEventListener('mouseenter', () => {
-// //   uxElement.textContent = 'UX 📱';
-// // });
-// // uxElement.addEventListener('mouseleave', () => {
-// //   uxElement.textContent = 'UX';
-// // });
-
-// const parsonsElement = document.getElementById('parsons');
-// parsonsElement.addEventListener('mouseenter', () => {
-//   parsonsElement.textContent = 'Parsons School of Design 🎓';
-// });
-// parsonsElement.addEventListener('mouseleave', () => {
-//   parsonsElement.textContent = 'Parsons School of Design';
-// });
-
-window.addEventListener('DOMContentLoaded', function () {
-  // --- Elements ---
-  const slides     = document.querySelectorAll('.slideshow-container img');
-  const tooltip    = document.querySelector('.slide-tooltip');
-  const centerZone = document.querySelector('.slide-zone.center');
-  const leftZone   = document.querySelector('.slide-zone.left');
-  const rightZone  = document.querySelector('.slide-zone.right');
-
-  // Guard: if something is missing, bail early
-  if (!slides.length || !tooltip || !centerZone || !leftZone || !rightZone) {
-    console.warn('Main page: required elements missing.');
-    return;
-  }
-
-  // --- Per-slide tooltip colors (index matches slides order) ---
-  const tooltipFontColors = ['#ffffff', '#f5f6ce', '#000000', '#000000', '#f18523'];
-  const tooltipBgColors   = ['#5ead52', '#248bc6', '#ff83ab', '#ffffff', '#f6eeec'];
-
-  function updateTooltipColors(index) {
-    tooltip.style.setProperty('--tt-fg', tooltipFontColors[index]);
-    tooltip.style.setProperty('--tt-bg', tooltipBgColors[index]);
-  }
-
-  // --- Slideshow state ---
-  let current  = 0;
-  let interval = null;
-
-  // If one slide is already marked active in HTML, start from it
-  const activeIndex = Array.from(slides).findIndex(s => s.classList.contains('active'));
-  if (activeIndex >= 0) {
-    current = activeIndex;
-  } else {
-    // Ensure slide 0 is visible if none marked active
-    slides[0].classList.add('active');
-  }
-
-  // Set initial tooltip colors for the starting slide
-  updateTooltipColors(current);
-
-  // --- Slideshow helpers ---
-  function showSlide(idx) {
-    slides[current].classList.remove('active');
-    current = (idx + slides.length) % slides.length;
-    slides[current].classList.add('active');
-    updateTooltipColors(current); // keep tooltip colors in sync with current slide
-  }
-
-  function nextSlide() { showSlide(current + 1); }
-  function prevSlide() { showSlide(current - 1); }
-
-  function startAuto() {
-    interval = setInterval(nextSlide, 6000);
-  }
-  function resetAuto() {
-    clearInterval(interval);
-    startAuto();
-  }
-
-  // --- Click navigation (left/right) ---
-  leftZone.addEventListener('click', (e) => {
-    e.stopPropagation();
-    prevSlide();
-    resetAuto();
-  });
-
-  rightZone.addEventListener('click', (e) => {
-    e.stopPropagation();
-    nextSlide();
-    resetAuto();
-  });
-
-  // --- Tooltip behavior in center zone ---
-  centerZone.addEventListener('mousemove', (e) => {
-    const desc = slides[current].dataset.desc || '';
-    const link = slides[current].dataset.link || '#';
-
-    // If your tooltip has a <span>, write into it; otherwise write directly
-    // Example if you DO have <a class="slide-tooltip"><span></span></a>:
-    // const span = tooltip.querySelector('span'); if (span) span.textContent = desc; else tooltip.textContent = desc;
-
-    tooltip.textContent = desc; // if your tooltip is plain <a> without inner <span>
-    tooltip.href = link;
-
-    // Ensure colors reflect current slide even if the user hovers before first transition
-    updateTooltipColors(current);
-
-    tooltip.classList.add('show');
-    tooltip.style.left = `${e.clientX}px`;
-    tooltip.style.top  = `${e.clientY}px`;
-  });
-
-  centerZone.addEventListener('mouseleave', () => {
-    tooltip.classList.remove('show');
-  });
-
-  centerZone.addEventListener('click', () => {
-    const link = slides[current].dataset.link;
-    if (link) window.open(link, '_blank', 'noopener');
-  });
-
-  // Start auto-advance
-  startAuto();
-});
-
-
-
-
-
 // (function () {
 //     const lens = document.querySelector('.cursor-lens');
 //     let raf, lastX = 0, lastY = 0, visible = false;
@@ -192,3 +44,124 @@ window.addEventListener('DOMContentLoaded', function () {
 //       });
 //     });
 //   })();
+
+window.addEventListener('DOMContentLoaded', function () {
+  /* =========================
+   *  MAIN PAGE SLIDESHOW + TOOLTIP
+   * ========================= */
+  (function initSlideshow() {
+    const slides     = document.querySelectorAll('.slideshow-container img');
+    const tooltip    = document.querySelector('.slide-tooltip');
+    const centerZone = document.querySelector('.slide-zone.center');
+    const leftZone   = document.querySelector('.slide-zone.left');
+    const rightZone  = document.querySelector('.slide-zone.right');
+
+    // If these don't exist, this isn't the slideshow page — bail.
+    if (!slides.length || !tooltip || !centerZone || !leftZone || !rightZone) return;
+
+    // Per-slide tooltip colors
+    const tooltipFontColors = ['#ffffff', '#f5f6ce', '#000000', '#000000', '#f18523'];
+    const tooltipBgColors   = ['#5ead52', '#248bc6', '#ff83ab', '#ffffff', '#f6eeec'];
+
+    function updateTooltipColors(index) {
+      tooltip.style.setProperty('--tt-fg', tooltipFontColors[index]);
+      tooltip.style.setProperty('--tt-bg', tooltipBgColors[index]);
+      // If you’re not using CSS vars, uncomment:
+      // tooltip.style.color = tooltipFontColors[index];
+      // tooltip.style.backgroundColor = tooltipBgColors[index];
+    }
+
+    // Slideshow state
+    let current  = 0;
+    let interval = null;
+
+    const activeIndex = Array.from(slides).findIndex(s => s.classList.contains('active'));
+    current = activeIndex >= 0 ? activeIndex : 0;
+    if (activeIndex < 0) slides[0].classList.add('active');
+
+    // Set initial tooltip colors
+    updateTooltipColors(current);
+
+    function showSlide(idx) {
+      slides[current].classList.remove('active');
+      current = (idx + slides.length) % slides.length;
+      slides[current].classList.add('active');
+      updateTooltipColors(current);
+    }
+
+    function nextSlide() { showSlide(current + 1); }
+    function prevSlide() { showSlide(current - 1); }
+
+    function startAuto()  { interval = setInterval(nextSlide, 6000); }
+    function resetAuto()  { clearInterval(interval); startAuto(); }
+
+    leftZone.addEventListener('click', (e) => { e.stopPropagation(); prevSlide(); resetAuto(); });
+    rightZone.addEventListener('click', (e) => { e.stopPropagation(); nextSlide(); resetAuto(); });
+
+    centerZone.addEventListener('mousemove', (e) => {
+      const desc = slides[current].dataset.desc || '';
+      const link = slides[current].dataset.link || '#';
+      tooltip.textContent = desc;
+      tooltip.href = link;
+      tooltip.classList.add('show');
+      tooltip.style.left = `${e.clientX}px`;
+      tooltip.style.top  = `${e.clientY}px`;
+      // colors already synced in showSlide/updateTooltipColors
+    });
+
+    centerZone.addEventListener('mouseleave', () => {
+      tooltip.classList.remove('show');
+    });
+
+    centerZone.addEventListener('click', () => {
+      const link = slides[current].dataset.link;
+      if (link) window.open(link, '_blank', 'noopener');
+    });
+
+    startAuto();
+  })();
+
+  /* =========================
+   *  INFO PAGE: FLOATING PHOTO ON HOVER
+   * ========================= */
+  (function initHoverPhoto() {
+    const hoverName = document.querySelector('.hover-name');
+    if (!hoverName) return; // Only run on pages that have the name span
+
+    // Create once
+    const cursorImg = document.createElement('img');
+    cursorImg.src = 'img/profile.jpg'; // <- your image path
+    cursorImg.alt = 'Profile photo';
+    cursorImg.className = 'cursor-photo';
+    // Ensure it's hidden initially (in case CSS missing)
+    cursorImg.style.opacity = '0';
+    cursorImg.style.pointerEvents = 'none';
+    cursorImg.style.position = 'fixed';
+    cursorImg.style.top = '0';
+    cursorImg.style.left = '0';
+    cursorImg.style.transform = 'translate(-50%, -50%)';
+    cursorImg.style.zIndex = '9999';
+    document.body.appendChild(cursorImg);
+
+    // Optional offset from cursor
+    const OFFSET_X = 120;
+    const OFFSET_Y = 120;
+
+    function show() { cursorImg.style.opacity = '1'; }
+    function hide() { cursorImg.style.opacity = '0'; }
+    function move(e) {
+      cursorImg.style.top  = `${e.clientY + OFFSET_Y}px`;
+      cursorImg.style.left = `${e.clientX + OFFSET_X}px`;
+    }
+
+    hoverName.addEventListener('mouseenter', show);
+    hoverName.addEventListener('mouseleave', hide);
+    hoverName.addEventListener('mousemove', move);
+
+    // Safety: hide on window leave
+    window.addEventListener('mouseleave', hide);
+  })();
+});
+
+
+

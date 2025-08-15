@@ -59,8 +59,8 @@ main {
     font-size: 14px;
   }
 
-.bio {
-    margin-right: 90px;
+.bio { 
+  margin-right: 90px; 
 }
   
 .bio p {
@@ -70,6 +70,21 @@ main {
     line-height: 28px;
     font-size: 20px;
   }
+
+.cursor-photo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 300px; /* size of the floating image */
+  height: auto;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  z-index: 999;
+  border-radius: 6px;
+}
+
 .links {
     list-style: none;
     margin: 0;
