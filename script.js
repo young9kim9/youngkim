@@ -47,6 +47,21 @@
 
 window.addEventListener('DOMContentLoaded', function () {
   /* =========================
+   *  HEADER SCROLL BEHAVIOUR
+   * ========================= */
+  (function initHeaderScroll() {
+    const header = document.querySelector('header');
+    if (!header) return;
+    window.addEventListener('scroll', function () {
+      if (window.scrollY > 10) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    }, { passive: true });
+  })();
+
+  /* =========================
    *  MAIN PAGE SLIDESHOW + TOOLTIP
    * ========================= */
   (function initSlideshow() {
@@ -60,8 +75,8 @@ window.addEventListener('DOMContentLoaded', function () {
     if (!slides.length || !tooltip || !centerZone || !leftZone || !rightZone) return;
 
     // Per-slide tooltip colors
-    const tooltipFontColors = ['#ffffff', '#f5f6ce', '#000000', '#000000', '#f18523'];
-    const tooltipBgColors   = ['#5ead52', '#248bc6', '#ff83ab', '#ffffff', '#f6eeec'];
+    const tooltipFontColors = ['#000000', '#ffffff', '#f5f6ce', '#000000', '#f18523'];
+    const tooltipBgColors   = ['#fff000', '#5ead52', '#248bc6', '#ffffff', '#f6eeec'];
 
     function updateTooltipColors(index) {
       tooltip.style.setProperty('--tt-fg', tooltipFontColors[index]);

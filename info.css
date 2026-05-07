@@ -7,31 +7,30 @@ html, body {
   }
 
 header {
-  position: fixed;             
-  top: 0;                      
+  position: fixed;
+  top: 0;
   left: 0;
-  width: 100%;                 
-  z-index: 20;                 
+  width: 100%;
+  z-index: 20;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   gap: 30px;
   padding: 16px 20px;
   box-sizing: border-box;
-  background-color: #fff;      
-  color: #000;                 
-  mix-blend-mode: normal;      
+  background: linear-gradient(to bottom, #fff 50%, transparent 100%);
+  color: #000;
+  mix-blend-mode: normal;
 }
 
 header a {
   text-decoration: none;
   color: #000;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 header a:hover {
   color: #888;
-  transition: color 0.2s;
+  transition: color;
 }
 
 .nav-left {
@@ -39,9 +38,58 @@ header a:hover {
   align-items: center;
 }
 
+.bio {
+  margin: 0;
+  font-size: 16px;
+  color: #000;
+  max-width: 550px;
+  line-height: 1.4;
+}
+
+#home {
+  color: #000 !important;
+  font-size: 16px;
+}
+
+#home:hover {
+  color: #888 !important;
+}
+
+.bio-text {
+  opacity: 1;
+  transition: opacity;
+}
+
+header.scrolled .bio-text {
+  opacity: 0;
+}
+
+.social-links {
+  transition: opacity;
+}
+
+header.scrolled .social-links {
+  opacity: 0;
+  pointer-events: none;
+}
+
 .nav-right {
   display: flex;
   gap: 30px;
+  align-items: flex-start;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+.social-links {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.social-links a {
+    font-size: 14px;
 }
   
 main {
@@ -49,7 +97,7 @@ main {
     grid-template-columns: 1.8fr 0.5fr 1fr;
     gap: 42px;
     align-items: flex-start;
-    margin-top: 84px;
+    margin-top: 100px;
     margin-left: 20px;
     margin-right: 20px;
     /* min-height: 82vh; */
@@ -92,15 +140,22 @@ main {
     margin: 0;
     padding: 0;
   }
+
 .links li {
     margin-bottom: 6px;
   }
+
+.links li:hover {
+    color: #888;
+  }
+  
 .links a {
     color: #000000;
     text-decoration: none;
   }
+
 .links a:hover {
-    text-decoration: underline;
+    color: #888;
   }
   
 .experience {
