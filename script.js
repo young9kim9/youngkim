@@ -47,6 +47,37 @@
 
 window.addEventListener('DOMContentLoaded', function () {
   /* =========================
+   *  THUMBNAIL TILT ON HOVER
+   * ========================= */
+  (function initTilt() {
+    const items = document.querySelectorAll('.list-container li');
+    if (!items.length) return;
+
+    const MAX_TILT = 10;
+
+    items.forEach(item => {
+      item.addEventListener('mouseenter', () => {
+        item.style.transition = 'transform 0.15s ease';
+      });
+
+      item.addEventListener('mousemove', (e) => {
+        const rect = item.getBoundingClientRect();
+        const dx   = (e.clientX - (rect.left + rect.width  / 2)) / (rect.width  / 2);
+        const dy   = (e.clientY - (rect.top  + rect.height / 2)) / (rect.height / 2);
+        const rotY =  dx * MAX_TILT;
+        const rotX = -dy * MAX_TILT;
+        item.style.transition = 'transform 0.08s ease';
+        item.style.transform  = `perspective(600px) rotateX(${rotX.toFixed(2)}deg) rotateY(${rotY.toFixed(2)}deg) scale(1.03)`;
+      });
+
+      item.addEventListener('mouseleave', () => {
+        item.style.transition = 'transform 0.5s ease';
+        item.style.transform  = 'perspective(600px) rotateX(0deg) rotateY(0deg) scale(1)';
+      });
+    });
+  })();
+
+  /* =========================
    *  HEADER SCROLL BEHAVIOUR
    * ========================= */
   (function initHeaderScroll() {

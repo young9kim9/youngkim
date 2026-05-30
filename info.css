@@ -17,9 +17,21 @@ header {
   gap: 30px;
   padding: 16px 20px;
   box-sizing: border-box;
-  background: linear-gradient(to bottom, #fff 50%, transparent 100%);
+  background: transparent;
   color: #000;
   mix-blend-mode: normal;
+}
+
+header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 120px;
+  background: linear-gradient(to bottom, #fff 50%, transparent 100%);
+  pointer-events: none;
+  z-index: -1;
 }
 
 header a {

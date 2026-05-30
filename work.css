@@ -120,6 +120,11 @@ padding-bottom: 40px;
   text-decoration: none;
 }
 
+.list-container li {
+  will-change: transform;
+  transform-style: preserve-3d;
+}
+
 .list-container li img {
   display: block;
   width: 100%;
