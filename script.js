@@ -47,6 +47,47 @@
 
 window.addEventListener('DOMContentLoaded', function () {
   /* =========================
+   *  PASSWORD GATE
+   * ========================= */
+  (function initPasswordGate() {
+    const modal  = document.getElementById('pw-modal');
+    const input  = document.getElementById('pw-input');
+    const error  = document.getElementById('pw-error');
+    const locked = document.querySelector('[data-locked="true"]');
+    if (!modal || !locked) return;
+
+    const PASS = 'youngkim000';
+    let dest   = locked.href;
+
+    locked.addEventListener('click', (e) => {
+      e.preventDefault();
+      modal.classList.add('active');
+      input.value = '';
+      error.classList.remove('visible');
+      setTimeout(() => input.focus(), 50);
+    });
+
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        if (input.value === PASS) {
+          modal.classList.remove('active');
+          window.location.href = dest;
+        } else {
+          error.classList.add('visible');
+          input.value = '';
+        }
+      }
+      if (e.key === 'Escape') {
+        modal.classList.remove('active');
+      }
+    });
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) modal.classList.remove('active');
+    });
+  })();
+
+  /* =========================
    *  THUMBNAIL TILT ON HOVER
    * ========================= */
   (function initTilt() {
