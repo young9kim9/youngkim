@@ -98,6 +98,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
     items.forEach(item => {
       item.addEventListener('mouseenter', () => {
+        item.style.willChange = 'transform';
         item.style.transition = 'transform 0.15s ease';
       });
 
@@ -114,6 +115,7 @@ window.addEventListener('DOMContentLoaded', function () {
       item.addEventListener('mouseleave', () => {
         item.style.transition = 'transform 0.5s ease';
         item.style.transform  = 'perspective(600px) rotateX(0deg) rotateY(0deg) scale(1)';
+        setTimeout(() => { item.style.willChange = 'auto'; }, 500);
       });
     });
   })();

@@ -3,6 +3,7 @@ body {
     font-family: "Instrument Sans", sans-serif;
     font-weight: 400;
     background-color: #ffffff;
+    isolation: isolate;
   }
   
 header {
@@ -10,7 +11,7 @@ header {
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 20;
+  z-index: 100;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -21,18 +22,6 @@ header {
   color: #000;
 }
 
-header::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 120px;
-  background: linear-gradient(to bottom, #fff 50%, transparent 100%);
-  pointer-events: none;
-  z-index: -1;
-}
-
 header a {
   text-decoration: none;
   color: #000;
@@ -40,8 +29,8 @@ header a {
 }
 
 header a:hover {
-  color: #888;
-  transition: color 0.2s;
+  opacity: 0.6;
+  transition: opacity 0.2s;
 }
 
 .nav-left {
