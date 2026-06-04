@@ -20,13 +20,13 @@ header {
   padding: 16px 20px;
   box-sizing: border-box;
   background: transparent;
-  color: #fff;
+  color: #000;
   mix-blend-mode: difference;
 }
 
 header a {
   text-decoration: none;
-  color: #fff;
+  color: #000;
   font-size: 16px;
 }
 
@@ -49,7 +49,7 @@ header a:hover {
 }
 
 #home {
-  color: #fff !important;
+  color: #000 !important;
   font-size: 16px;
 }
 
