@@ -51,7 +51,8 @@ main {
     margin-bottom: 40px;
   }
   
-main img {
+main img,
+main video {
     display: block;
       width: 100%;
       height: auto;
