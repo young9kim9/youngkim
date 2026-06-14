@@ -87,8 +87,9 @@ main .title {
   }
   
 .text-container .description {
-    width: 547px;
-    line-height: 1.5;
+    width: 700px;
+    line-height: 1.4;
+    font-size: 24px;
   }
   
 main iframe {

@@ -11,6 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+      <script src="screensaver.js" defer></script>
   </head>
 
   <body>
@@ -51,7 +52,7 @@
         </a>
         <a href="work-wikibook.html">
           <li class="filterDiv typo 2023">
-            <img src="img/wiki_thumbnail.png">
+            <img src="img/wiki_thumbnail_2.jpg">
             <div class="category">Publication</div>
             <div class="title">Homo Sapiens</div>
           </li>
@@ -63,12 +64,11 @@
             <div class="title">What Are You Scrolling Away From?</div>
           </li>
         </a>
-      
-        <a href="work-fastforward.html">
-          <li class="filterDiv interaction 2024">
-            <img src="img/ff_heroimg2.gif">
-            <div class="category">Publication & Website</div>
-            <div class="title">Fast Forward</div>
+        <a href="work-thehandsome.html" id="thehandsome-link">
+          <li>
+            <img src="img/thehandsome_thumbnail_2.jpg">
+            <div class="category">UX/UI</div>
+            <div class="title">TheHandsome.com, Fashion E-commerce App (Coming soon) 🔒</div>
           </li>
         </a>
         <!-- <a href="work-slowdown.html">
@@ -85,13 +85,38 @@
             <div class="title">How to be an Artist</div>
           </li>
         </a>
+        <a href="work-nurssi.html">
+          <li>
+            <img src="img/nurssi_thumbnail_2.jpg">
+            <div class="category">UX/UI</div>
+            <div class="title">NURSSI, Assistant on a Wrist For Nurses</div>
+          </li>
+        </a>
+        <a href="work-voda.html">
+          <li>
+            <img src="img/voda_thumbnail.jpg">
+            <div class="category">UX/UI</div>
+            <div class="title">VODA, AI Journal For Blinded Elderly People (Coming soon)</div>
+          </li>
+        </a>
         <a href="work-social-campaign.html">
           <li class="filterDiv typo 2024">
-            <img src="img/campaign_billboard.jpg">
-            <div class="category">Social Campaign</div>
+            <div style="overflow: hidden; border-radius: 6px;">
+              <img src="img/campaign_posters.jpg" style="transform: scale(1.15); border-radius: 0;">
+            </div>
+              <div class="category">Social Campaign</div>
             <div class="title">Imagine a World Without Hate</div>
           </li>
-        </a>  
+        </a> 
+        <a href="work-fastforward.html">
+          <li class="filterDiv interaction 2024">
+            <div style="overflow: hidden; border-radius: 6px;">
+              <img src="img/ff_heroimg2.gif" style="transform: scale(1.2); border-radius: 0;">
+            </div>
+            <div class="category">Publication & Website</div>
+            <div class="title">Fast Forward</div>
+          </li>
+        </a> 
         <a href="work-starmap.html">
           <li class="filterDiv typo 2024">
             <img src="img/starmap_thumbnail.jpg">
@@ -99,13 +124,7 @@
             <div class="title">Nonverbal Communication</div>
           </li>
         </a>
-        <a href="work-mantra.html" data-locked="true">
-          <li>
-            <img src="img/thehandsome_thumbnail.png">
-            <div class="category">Misc / 2020-2022</div>
-            <div class="title">Miscellaneous Works from a Design Agency 🔒</div>
-          </li>
-        </a>
+        
         <!-- <a href="work-collage.html">
           <li class="filterDiv 2025">
             <img src="img/collage_detail_01.jpg">
@@ -115,15 +134,47 @@
         </a> -->
       </ul>
     </main>
-    
-  
-  <div id="pw-modal" class="pw-modal">
-    <div class="pw-modal-box">
-      <p class="pw-modal-label">Password</p>
-      <input type="password" id="pw-input" class="pw-input" autocomplete="off">
-      <p class="pw-error" id="pw-error">Incorrect password.</p>
+
+    <!-- Password modal for TheHandsome -->
+    <div class="pw-modal" id="pw-modal">
+      <div class="pw-modal-box" id="pw-modal-box">
+        <p class="pw-modal-label">Password</p>
+        <input class="pw-input" id="pw-input" type="password" autocomplete="off" />
+        <p class="pw-error" id="pw-error">Incorrect</p>
+      </div>
     </div>
-  </div>
+
+    <script>
+      var modal = document.getElementById('pw-modal');
+      var input = document.getElementById('pw-input');
+      var error = document.getElementById('pw-error');
+
+      document.getElementById('thehandsome-link').addEventListener('click', function (e) {
+        e.preventDefault();
+        modal.classList.add('active');
+        input.focus();
+      });
+
+      modal.addEventListener('click', function (e) {
+        if (e.target === modal) {
+          modal.classList.remove('active');
+          input.value = '';
+          error.classList.remove('visible');
+        }
+      });
+
+      input.addEventListener('keydown', function (e) {
+        error.classList.remove('visible');
+        if (e.key === 'Enter') {
+          if (input.value === 'youngkim26') {
+            window.location.href = 'work-thehandsome.html';
+          } else {
+            error.classList.add('visible');
+            input.value = '';
+          }
+        }
+      });
+    </script>
 
   </body>
 </html>
