@@ -77,11 +77,12 @@ main .title {
     margin-bottom: 100px;
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 40px;
     justify-content: center;
   }
   
 .text-container .info {
+  font-size: 14px;
     width: 263px;
     line-height: 1.5;
   }
