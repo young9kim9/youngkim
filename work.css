@@ -113,8 +113,8 @@ padding-bottom: 40px;
   margin-top: 250px;
   list-style: none;
   display: grid;
-  grid-template-columns: repeat(3, minmax(280px, 1fr));
-  gap: 40px 10px;        
+  grid-template-columns: repeat(2, minmax(280px, 1fr));
+  gap: 40px 20px;        
   padding: 0;
   justify-content: start;
   align-content: start;
@@ -123,6 +123,19 @@ padding-bottom: 40px;
 .list-container a {
   display: block;
   text-decoration: none;
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.list-container a.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.list-container a.visible:hover {
+  opacity: 0.65;
+  transition: opacity 0.2s ease;
 }
 
 
@@ -147,11 +160,6 @@ font-size: 16px;
 color: #000000;
 }
 
-@media (max-width: 1100px) {
-  .list-container {
-    grid-template-columns: repeat(2, minmax(260px, 1fr));
-  }
-}
 
 .pw-modal {
   display: none;

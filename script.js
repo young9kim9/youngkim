@@ -88,36 +88,28 @@ window.addEventListener('DOMContentLoaded', function () {
   })();
 
   /* =========================
-   *  THUMBNAIL TILT ON HOVER
+   *  SCROLL REVEAL
    * ========================= */
-  (function initTilt() {
-    const items = document.querySelectorAll('.list-container li');
+  (function initScrollReveal() {
+    const items = document.querySelectorAll('.list-container > a');
     if (!items.length) return;
 
-    const MAX_TILT = 10;
-
-    items.forEach(item => {
-      item.addEventListener('mouseenter', () => {
-        item.style.willChange = 'transform';
-        item.style.transition = 'transform 0.15s ease';
-      });
-
-      item.addEventListener('mousemove', (e) => {
-        const rect = item.getBoundingClientRect();
-        const dx   = (e.clientX - (rect.left + rect.width  / 2)) / (rect.width  / 2);
-        const dy   = (e.clientY - (rect.top  + rect.height / 2)) / (rect.height / 2);
-        const rotY =  dx * MAX_TILT;
-        const rotX = -dy * MAX_TILT;
-        item.style.transition = 'transform 0.08s ease';
-        item.style.transform  = `perspective(600px) rotateX(${rotX.toFixed(2)}deg) rotateY(${rotY.toFixed(2)}deg) scale(1.03)`;
-      });
-
-      item.addEventListener('mouseleave', () => {
-        item.style.transition = 'transform 0.5s ease';
-        item.style.transform  = 'perspective(600px) rotateX(0deg) rotateY(0deg) scale(1)';
-        setTimeout(() => { item.style.willChange = 'auto'; }, 500);
-      });
+    // Stagger: right-column items (odd index) delayed slightly
+    items.forEach(function (item, i) {
+      item.style.transitionDelay = (i % 2) * 90 + 'ms';
     });
+
+    const observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        } else {
+          entry.target.classList.remove('visible');
+        }
+      });
+    }, { threshold: 0.08 });
+
+    items.forEach(function (item) { observer.observe(item); });
   })();
 
   /* =========================
