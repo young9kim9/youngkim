@@ -30,7 +30,7 @@ header {
 header a {
   text-decoration: none;
   color: #000;
-  font-size: 16px;
+  font-size: 14px;
 }
 
 header a:hover {
@@ -45,7 +45,7 @@ header a:hover {
 
 .bio {
   margin: 0;
-  font-size: 16px;
+  font-size: 14px;
   color: #000;
   max-width: 550px;
   line-height: 1.4;
@@ -53,7 +53,7 @@ header a:hover {
 
 #home {
   color: #000 !important;
-  font-size: 16px;
+  font-size: 14px;
 }
 
 #home:hover {
@@ -93,12 +93,12 @@ header.scrolled .social-links {
 .social-links {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 6px;
   flex-shrink: 0;
 }
 
 .social-links a {
-    font-size: 14px;
+    font-size: 13px;
 }
 
 main {
@@ -150,9 +150,6 @@ padding-bottom: 40px;
   aspect-ratio: 16 / 9;
 }
 
-.list-container a.span-3 li .title {
-  font-size: 20px;
-}
 
 .list-container li img {
   display: block;
@@ -171,7 +168,7 @@ color: #636363;
 
 .list-container li .title {
 margin-top: 6px;
-font-size: 16px;
+font-size: 14px;
 color: #000000;
 }
 
